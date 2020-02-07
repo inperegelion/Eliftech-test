@@ -57,12 +57,20 @@ MongoClient.connect(mongoUrl, (err, client) => {
   });
 
   app.get("/get-orders", (req, res) => {
-    dbo.find().toArray((err, result) => {
-      if (err) return console.error(err);
-      console.log(result);
+    const sortObj = {};
+    sortObj[req.query.sortBy] = 1;
 
-      res.send(result);
-    });
+    dbo
+      .find()
+      .sort(sortObj)
+      .toArray((err, result) => {
+        if (err) return console.error(err);
+        console.log(req.query);
+        res.send({
+          totalSize: result.length,
+          orders: result.slice(Number(req.query.from), Number(req.query.to)),
+        });
+      });
   });
 });
 

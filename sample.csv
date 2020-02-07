@@ -1,5 +1,16 @@
-user_email; date; value; currency; status
-test@test,com; 20.01.2019 23:11:12; 57.50; USD; approved
-test2@test,com; 23.02.2019 03:06:00; 11.22; USD; pending
-test@test,com; 02.01.2019 11:02:43; 31.34; USD
-test3@test,com; 11.02.2019 22:02:45; 560.00; USD; rejected
+user_email     ;date                ;value  ;currency ;status
+test@test,com  ;20.01.2019 23:11:12 ;57.50  ;USD      ;rejected
+test2@test,com ;23.02.2019 03:06:00 ;11.22  ;USD      ;pending
+test@test,com  ;02.01.2019 11:02:43 ;31.34  ;USD      ;pending
+test4@test,com ;21.01.2019 23:11:12 ;57.50  ;USD      ;approved
+test5@test,com ;20.01.2019 23:11:12 ;57.50  ;USD      ;approved
+test6@test,com ;28.01.2019 23:11:12 ;57.50  ;USD      ;approved
+test6@test,com ;27.01.2019 23:11:12 ;57.50  ;USD      ;pending
+test6@test,com ;26.01.2019 23:11:12 ;157.50 ;USD      ;approved
+test2@test,com ;25.01.2019 23:11:12 ;5.50   ;USD      ;rejected
+test2@test,com ;23.01.2019 23:11:12 ;37.50  ;USD      ;approved
+test2@test,com ;23.01.2019 23:11:12 ;12.59  ;USD      ;rejected
+test3@test,com ;12.02.2019 22:02:45 ;560.00 ;USD      ;rejected
+test@test,com  ;11.01.2019 23:11:12 ;11.90  ;USD      ;approved
+test5@test,com ;10.01.2019 23:11:12 ;17.50  ;USD      ;approved
+test@test,com  ;30.01.2019 23:11:12 ;33.50  ;USD      ;approved

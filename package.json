@@ -11,7 +11,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "run-api": "nodemon ./api/server.js"
+    "run-api": "nodemon ./server.js"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -29,6 +29,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
     "mongodb": "^3.5.2",

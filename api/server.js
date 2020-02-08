@@ -26,14 +26,6 @@ MongoClient.connect(mongoUrl, (err, client) => {
 
   app.listen(3001);
 
-  app.post("/new-orders", (req, res) => {
-    dbo.save(req.body, (err, result) => {
-      if (err) return console.log(err);
-
-      console.log(req.body);
-      // res.redirect("/")
-    });
-  });
   app.post("/upload-csv", (req, res) => {
     const form = new IncomingForm();
 
@@ -46,12 +38,13 @@ MongoClient.connect(mongoUrl, (err, client) => {
             console.log("Number of documents inserted: " + res.insertedCount);
           });
         })
+        .then(res => res.json())
         .catch(err => {
-          console.error("Catched!", err.err);
+          if (err) {
+            console.error("Catched! Probably invalid csv");
+            res.status(400).send("Probably invalid csv");
+          }
         });
-    });
-    form.on("end", file => {
-      res.json();
     });
     form.parse(req);
   });

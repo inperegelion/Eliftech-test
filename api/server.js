@@ -32,19 +32,20 @@ MongoClient.connect(mongoUrl, (err, client) => {
     form.on("file", (field, file) => {
       csv({ delimiter: ";", checkColumn: true })
         .fromFile(file.path)
-        .then(jsonObj => {
-          dbo.insertMany(jsonObj, (err, res) => {
-            if (err) throw err;
-            console.log("Number of documents inserted: " + res.insertedCount);
-          });
-        })
-        .then(res => res.json())
-        .catch(err => {
-          if (err) {
-            console.error("Catched! Probably invalid csv");
+        .then(
+          jsonObj => {
+            dbo.insertMany(jsonObj, (err, result) => {
+              console.log(
+                "Number of documents inserted: " + result.insertedCount
+              );
+              res.json();
+            });
+          },
+          err => {
+            console.error("invalid csv received");
             res.status(400).send("Probably invalid csv");
           }
-        });
+        );
     });
     form.parse(req);
   });

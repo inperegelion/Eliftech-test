@@ -23,7 +23,7 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-one-expression-per-line": [1, { "allow": "literal" }],
-    "max-len": [1, { "code": 80, "tabWidth": 2, "ignoreUrls": true }],
+    "max-len": [1, { "code": 90, "tabWidth": 2, "ignoreUrls": true }],
     "jsx-quotes": [2, "prefer-double"],
     "quotes": [2, "double", { "avoidEscape": true }]
   }

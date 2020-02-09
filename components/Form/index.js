@@ -24,7 +24,7 @@ class Form extends React.Component {
     if (!this.state.invalidCSV) {
       const fd = new FormData();
       fd.append("file", this.state.selectedFile, this.state.selectedFile.name);
-      axios.post("http://localhost:3001/upload-csv", fd).then(
+      axios.post("http://localhost:3030/upload-csv", fd).then(
         res => {
           this.setState({ invalidCSV: false });
         },

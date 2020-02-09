@@ -18,7 +18,7 @@ class Orders extends React.Component {
       Number((this.state.currentPage + 1) * this.state.linesOnPage) //
     }&sortBy=${this.state.sortBy}`;
 
-    fetch(`http://localhost:3001/get-orders${ordersQuery}`)
+    fetch(`http://localhost:3030/get-orders${ordersQuery}`)
       .then(res => res.json())
       .then(res => {
         this.setState(state => ({

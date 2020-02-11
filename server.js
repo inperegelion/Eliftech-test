@@ -3,9 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const IncomingForm = require("formidable").IncomingForm;
 const cors = require("cors");
-const fs = require("fs");
-const csv = require("csvtojson");
 const moment = require("moment");
+const fs = require("fs");
+const csv2json = require("csvtojson");
+const Json2csvParser = require("json2csv").Parser;
 require("dotenv").config();
 
 const app = express();
@@ -27,7 +28,7 @@ MongoClient.connect(process.env.MONGO_DB_SERVER, (err, client) => {
     const form = new IncomingForm();
 
     form.on("file", (field, file) => {
-      csv({ delimiter: ";", checkColumn: true })
+      csv2json({ delimiter: ";", checkColumn: true })
         .fromFile(file.path)
         .then(
           jsonObj => {
@@ -96,7 +97,14 @@ MongoClient.connect(process.env.MONGO_DB_SERVER, (err, client) => {
         },
       ])
       .toArray((err, result) => {
-        console.log(result);
+        const json2csvParser = new Json2csvParser({
+          fields: ["_id.user_email", "_id.formattedDate", "total"],
+          delimiter: ";",
+          quote: "",
+          pretty: true,
+        });
+        const csv = json2csvParser.parse(result);
+        res.send(csv);
       });
   });
 });

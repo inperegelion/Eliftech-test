@@ -63,6 +63,28 @@ class Orders extends React.Component {
     });
   };
 
+  downloadStatistics = () => {
+    fetch(`http://localhost:3030/get-user-statistics`)
+      .then(res => res.text())
+      .then(res => {
+        console.log(`STATISTICS RECEIVED: \n`, res);
+        this.saveStatisticsInFile(res);
+      });
+    console.log("FETCHED STATISTICS");
+  };
+
+  saveStatisticsInFile = data => {
+    let blob = new Blob([data], { type: "octet/stream" });
+    let url = window.URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.style = "display: none";
+    a.href = url;
+    a.download = "statistics.csv";
+    a.click();
+    document.body.appendChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
   render() {
     return (
       <div>
@@ -81,6 +103,9 @@ class Orders extends React.Component {
             <span>{this.state.linesOnPage}</span>
             <button onClick={() => this.changeOrdersOnPage(1)}>{"+"}</button>
           </div>
+          <button onClick={this.downloadStatistics} className="tool">
+            Download
+          </button>
         </div>
         <table>
           <thead>

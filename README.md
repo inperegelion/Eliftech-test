@@ -1,6 +1,8 @@
 # ELIFTECH TEST TASK
 
-### Install
+#### ⚠️ important! ⚠️
+
+_You are looking at the master branch. The code here was written in three days (first deadline). To see what I've done later - switch to the second branch._
 
 ### Run
 
@@ -31,8 +33,6 @@ See the `./.env` file to connect to your local MongoDB server
 
 - Redux ❌
 - MongoDB aggregations ❌
-- Next.js✔️
-- Express.js ✔️
 
 ##### The task is
 

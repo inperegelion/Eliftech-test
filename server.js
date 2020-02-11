@@ -19,7 +19,7 @@ app.use(
 );
 
 MongoClient.connect(process.env.MONGO_DB_SERVER, (err, client) => {
-  if (err) return console.log(err);
+  if (err) return console.error(err);
   dbo = client.db(process.env.DB_NAME).collection(process.env.COLLECTION_NAME);
 
   app.listen(process.env.PORT || 3000);
@@ -32,19 +32,14 @@ MongoClient.connect(process.env.MONGO_DB_SERVER, (err, client) => {
         .fromFile(file.path)
         .then(
           jsonObj => {
-            jsonObj.map(order => {
-              order.formattedDate = moment(order.date, "DD.MM.YYYY hh:mm:ss") //
-                .format("MMM YYYY");
-              return order;
-            });
-            console.log(jsonObj);
+            jsonObj = jsonObj.map(order => ({
+              ...order,
+              formattedDate: moment(order.date, "DD.MM.YYYY hh:mm:ss").format("MMM YYYY"),
+            }));
 
             dbo.insertMany(jsonObj, (err, result) => {
               if (err) throw err;
-              else {
-                console.log("Number of documents inserted: " + result.insertedCount);
-                res.status(200).json();
-              }
+              else res.status(200).json("file is ok, orders inserted in DB");
             });
           },
           err => {
@@ -72,12 +67,6 @@ MongoClient.connect(process.env.MONGO_DB_SERVER, (err, client) => {
         });
       });
   });
-
-  /** IMPORTANT CODE BELOW!
-   *  I'm writing this just at the first deadline minutes. As U can C, the
-   *  optional part is about to be ready.The operation is ready to be implemented
-   *  but it, sadly, is not :(
-   *  */
 
   app.get("/get-user-statistics", (req, res) => {
     dbo
